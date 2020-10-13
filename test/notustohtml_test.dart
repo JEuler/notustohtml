@@ -1,4 +1,3 @@
-import 'package:quill_delta/quill_delta.dart';
 import 'package:test/test.dart';
 import 'package:notustohtml/notustohtml.dart';
 import 'package:notus/notus.dart';
@@ -426,31 +425,6 @@ void main() {
             "attributes": {"block": "ul"}
           }
         ]);
-
-        expect(converter.decode(html), doc.toDelta());
-      });
-    });
-
-    group('Embeds', () {
-      test("Image", () {
-        final String html = "<img src=\"http://fake.link/image.png\"><br><br>";
-        final delta = Delta()..insert("\n");
-        NotusDocument tempdocument = NotusDocument.fromDelta(delta);
-        var index = tempdocument.length;
-        tempdocument.format(index - 1, 0,
-            NotusAttribute.embed.image("http://fake.link/image.png"));
-        final NotusDocument doc = tempdocument;
-
-        expect(converter.decode(html), doc.toDelta());
-      });
-      test("Line", () {
-        final String html = "<hr><br><br>";
-        final delta = Delta()..insert("\n");
-        NotusDocument tempdocument = NotusDocument.fromDelta(delta);
-        var index = tempdocument.length;
-        tempdocument.format(index - 1, 0,
-            NotusAttribute.embed.horizontalRule);
-        final NotusDocument doc = tempdocument;
 
         expect(converter.decode(html), doc.toDelta());
       });
